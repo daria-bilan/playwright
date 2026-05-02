@@ -17,7 +17,7 @@ test.skip('Interaction with Web Elements on GitLab', async ({page})=>{
     await page.getByTestId('new-user-last-name-field').fill('Smith');
 })
 
-test.only('Using Various Locator Methods', async ({page})=>{
+test('Using Various Locator Methods', async ({page})=>{
     await page.setViewportSize({width: 1000, height: 1360});
     await page.goto('https://gitlab.com/');
     await page.waitForTimeout(1000);
