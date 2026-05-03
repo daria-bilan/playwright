@@ -6,7 +6,6 @@ test.skip('Basic Navigation', async ({page})=>{
     await page.reload();
 })
 
-
 test.skip('Interaction with Web Elements on GitLab', async ({page})=>{
     await page.goto('https://gitlab.com/');
     const button = page.locator('[data-ga-name="free trial"]');
@@ -17,7 +16,7 @@ test.skip('Interaction with Web Elements on GitLab', async ({page})=>{
     await page.getByTestId('new-user-last-name-field').fill('Smith');
 })
 
-test.only('Using Various Locator Methods', async ({page})=>{
+test.skip('Using Various Locator Methods', async ({page})=>{
     await page.setViewportSize({width: 1000, height: 1360});
     await page.goto('https://gitlab.com/');
     await page.waitForTimeout(1000);
