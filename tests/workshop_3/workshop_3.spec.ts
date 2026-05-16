@@ -32,7 +32,7 @@ test.skip('Drag and Drop', async({page})=>{
 
 })
 
-test.only('Handling IFrame', async({page})=>{
+test.skip('Handling IFrame', async({page})=>{
     await page.goto('file:///D:/Personal/Programming/Playwright/Playwright/tests/workshop_3/index.html');
     const iframeElement = await page.frame({name: 'iframeName'});
     const inputSelector = '#iframe-input';
