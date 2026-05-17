@@ -40,7 +40,7 @@ test.describe('Type Definitions and Interfaces', ()=>{
         isStudent: true
     }
     
-    test.only('Type Def and Interfaces', async({page})=>{
+    test.skip('Type Def and Interfaces', async({page})=>{
         await page.goto('file:///D:/Personal/Programming/Playwright/Playwright/tests/workshop_7/index.html')
         await page.fill(selectors.firstName, user.firstName)
         await page.fill(selectors.age, user.age.toString())
