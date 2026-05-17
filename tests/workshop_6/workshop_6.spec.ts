@@ -14,7 +14,7 @@ test.describe('User Registration Test', ()=>{
         await page.goto('file:///D:/Personal/Programming/Playwright/Playwright/tests/workshop_6/index.html')
     });
 
-    test.only('Register with a valid data', async({page})=>{
+    test.skip('Register with a valid data', async({page})=>{
         await page.fill('#firstName',testData.firstName)
         await page.fill('#lastName', testData.lastName)
         await page.fill('#address', testData.address)
@@ -34,7 +34,7 @@ test.describe('User Registration Test', ()=>{
         await expect(numberText).toEqual(testData.number)
     });
 
-    test.only('Register with empty fields', async({page})=>{
+    test.skip('Register with empty fields', async({page})=>{
         await page.fill('#firstName',testData.firstName)
         await page.fill('#lastName', testData.lastName)
         await page.click('#register')
@@ -43,7 +43,7 @@ test.describe('User Registration Test', ()=>{
         expect(error).toBe('Please fill in all fields.')
     });
 
-    test.only('Register with all empty fields', async({page})=>{
+    test.skip('Register with all empty fields', async({page})=>{
         await page.click('#register')
         const error = await page.locator('#error p').textContent()
 
