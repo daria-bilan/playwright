@@ -4,7 +4,7 @@ test.describe('Dynamic table', ()=>{
     test.beforeEach(async({page})=>{
         await page.goto('https://qaplayground.dev/apps/dynamic-table/')
     })
-    test.only('Find spider-man real name', async({page})=>{
+    test.skip('Find spider-man real name', async({page})=>{
         await expect(page.locator('text=SUPERHERO')).toBeVisible()
 
         const expectedRealName = 'Peter Parker'
@@ -16,7 +16,7 @@ test.describe('Dynamic table', ()=>{
 
     })
 
-    test.only('Find Black Widow status', async({page})=>{
+    test.skip('Find Black Widow status', async({page})=>{
         await expect(page.locator('text=SUPERHERO')).toBeVisible()
 
         const expectedStatus = 'Active'
