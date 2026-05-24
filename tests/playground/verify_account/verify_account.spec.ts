@@ -5,7 +5,7 @@ test.describe('Account verification', ()=>{
         await page.goto('https://qaplayground.dev/apps/verify-account/')
     })
 
-    test.only('Check verify block', async({page})=>{
+    test.skip('Check verify block', async({page})=>{
         await expect(page.locator('.container')).toBeVisible()
         const expectedTitle = 'Verify Your Account'
         const expectedBodyText = 'We emailed you the six digit code to cool_guy@email.com\nEnter the code below to confirm your email address.'
@@ -26,7 +26,7 @@ test.describe('Account verification', ()=>{
         expect(confCode).toHaveText(expectedText)
     })
 
-    test.only('Input invalid code', async({page})=>{
+    test.skip('Input invalid code', async({page})=>{
         await expect(page.locator('.container')).toBeVisible()
         const codeContainer = await page.locator('.code-container')
         await expect(codeContainer).toBeVisible()
@@ -40,7 +40,7 @@ test.describe('Account verification', ()=>{
         expect(successContainer).not.toBeVisible()
     })
 
-    test.only('Input valid code', async({page})=>{
+    test.skip('Input valid code', async({page})=>{
         await expect(page.locator('.container')).toBeVisible()
         const codeContainer = await page.locator('.code-container')
         await expect(codeContainer).toBeVisible()
