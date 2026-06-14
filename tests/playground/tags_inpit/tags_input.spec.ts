@@ -50,7 +50,7 @@ test.describe('Tags input', ()=>{
         await addNewTag(inputLocator, 1)
         const tags = page.locator('.content li')
         await expect(tags).toHaveCount(3)
-        expect(page.locator('.details > p > span')).toHaveText('7')
+        await expect(page.locator('.details > p > span')).toHaveText('7')
     })
 
     test.only('Excede remaining tags', async({page})=>{
@@ -61,7 +61,7 @@ test.describe('Tags input', ()=>{
 
         await addNewTag(inputLocator, 10)
         await expect(tags).toHaveCount(10)
-        expect(page.locator('.details > p > span')).toHaveText('0')
+        await expect(page.locator('.details > p > span')).toHaveText('0')
 
     })
 })
