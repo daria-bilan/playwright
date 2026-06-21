@@ -14,5 +14,12 @@ test.describe('CSS Locator', () => {
       // tag and attribute
       await page.locator('input[name=q]').fill('T-Shirts');
       await page.locator('[name=q]').fill('T-Shirts');
+
+      // tag + class + attrubute
+      await page.locator('input.search-box-text[value="Search store"]').fill('T-Shirts');
+   });
+
+   test('Absolure css locator', async ({ page }) => {
+      await page.goto('https://www.testpages.eviltester.com/styled/basic-web-page-test.html');
    });
 });
