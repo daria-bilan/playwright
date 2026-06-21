@@ -18,8 +18,4 @@ test.describe('CSS Locator', () => {
       // tag + class + attrubute
       await page.locator('input.search-box-text[value="Search store"]').fill('T-Shirts');
    });
-
-   test('Absolure css locator', async ({ page }) => {
-      await page.goto('https://www.testpages.eviltester.com/styled/basic-web-page-test.html');
-   });
 });
