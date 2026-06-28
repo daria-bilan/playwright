@@ -180,7 +180,7 @@ test.describe('HTML elements', () => {
       expect(originalListOfOptions).not.toEqual(sortedListOfOptions);
    });
 
-   test.only('Verify the duplicated options', async ({ page }) => {
+   test('Verify the duplicated options', async ({ page }) => {
       const dropDownOptions: Locator = page.locator('#colors option');
       const optionsText: string[] = (await dropDownOptions.allTextContents()).map((text) => text.trim());
 
