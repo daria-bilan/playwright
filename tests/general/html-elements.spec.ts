@@ -134,5 +134,57 @@ test.describe('HTML elements', () => {
       await expect(dropdownOptions).toHaveCount(10);
    });
 
-   test.only('Multiple selected dropdowm options', async ({ page }) => {});
+   test('An option is present in the dropdown list', async ({ page }) => {
+      const dropdownOptions: Locator = page.locator('#country option');
+      const optionsText: string[] = (await dropdownOptions.allTextContents()).map((text) => text.trim());
+
+      expect(optionsText).toContain('Germany');
+   });
+
+   test('Multiple selected dropdowm options', async ({ page }) => {
+      const multiDropdown: Locator = page.locator('#colors');
+
+      // await multiDropdown.selectOption(['red', 'green', 'white']);                                 // using ids
+      // await multiDropdown.selectOption([{ label: 'Red' }, { label: 'Blue' }, { label: 'Green' }]); // using label
+      await multiDropdown.selectOption(['Red', 'Blue', 'Green']); // visible text
+
+      await expect(multiDropdown).toHaveValues(['red', 'green', 'white']);
+      await page.waitForTimeout(3000);
+   });
+
+   test('Check options amount (multi selected dropdown)', async ({ page }) => {
+      const multiDropdown: Locator = page.locator('#colors option');
+      await expect(multiDropdown).toHaveCount(7);
+   });
+
+   test('An option is present in the multi selected dropdown list', async ({ page }) => {
+      const dropdownOptions: Locator = page.locator('#colors option');
+      const optionsText: string[] = (await dropdownOptions.allTextContents()).map((text) => text.trim());
+
+      expect(optionsText).toContain('Green');
+
+      // print options from the dropdowns
+      for (const option of optionsText) {
+         console.log(option);
+      }
+   });
+
+   test('Validate the options are sorted', async ({ page }) => {
+      const dropDownOptions: Locator = page.locator('#colors option');
+      const optionsText: string[] = (await dropDownOptions.allTextContents()).map((text) => text.trim());
+      const originalListOfOptions: string[] = [...optionsText];
+      const sortedListOfOptions: string[] = [...optionsText].sort();
+      console.log(originalListOfOptions);
+      console.log(sortedListOfOptions);
+
+      expect(originalListOfOptions).not.toEqual(sortedListOfOptions);
+   });
+
+   test.only('Verify the duplicated options', async ({ page }) => {
+      const dropDownOptions: Locator = page.locator('#colors option');
+      const optionsText: string[] = (await dropDownOptions.allTextContents()).map((text) => text.trim());
+
+      const hasDuplicates = (arr: any[]): boolean => new Set(arr).size !== arr.length;
+      expect(hasDuplicates(optionsText)).toBe(true);
+   });
 });
