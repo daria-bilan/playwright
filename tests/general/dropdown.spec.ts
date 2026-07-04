@@ -70,4 +70,32 @@ test.describe('HTML elements', () => {
 
       await browser.close();
    });
+
+   test.only('Hidden bootstrap dropdown', async ({ page }) => {
+      await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
+
+      // Login steps
+      await page.locator('input[name="username"]').fill('Admin');
+      await page.locator('input[name="password"]').fill('admin123');
+      await page.locator('button[type="submit"]').click();
+
+      await expect(page).toHaveURL('https://opensource-demo.orangehrmlive.com/web/index.php/dashboard/index');
+      await expect(page.getByRole('navigation', { name: 'Sidepanel' })).toBeVisible();
+
+      await page.getByText('PIM').click();
+      await expect(page.getByRole('heading', { name: 'PIM' })).toBeVisible();
+
+      await expect(page.locator('form i').nth(2)).toBeVisible();
+      const list: Locator = page.locator('form i').nth(2);
+      await list.click();
+      await expect(page.getByRole('listbox')).toBeVisible();
+      await page.waitForTimeout(3000);
+
+      const options: Locator = page.locator('div[role="listbox"] span');
+      const count: number = await options.count();
+      console.log(count);
+
+      await page.getByText('Automaton Tester').click();
+      await expect(page.locator('//div[@class="oxd-select-text-input"]').nth(2)).toHaveText('Automaton Tester');
+   });
 });
