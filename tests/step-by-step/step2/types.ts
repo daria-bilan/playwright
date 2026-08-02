@@ -8,6 +8,7 @@ export interface Credentials {
 export interface Product {
    itemName: string;
    itemPrice: string;
+   details?: { itemDesc?: string };
 }
 
 export type SortOption = 'Name (A to Z)' | 'Name (Z to A)' | 'Price (low to high)' | 'Price (high to low)';
