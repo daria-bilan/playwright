@@ -1,6 +1,7 @@
 import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Product } from '../../step2/types';
+import { CartPage } from './CartPage';
 
 export class InventoryPage extends BasePage {
    public getItemCard(itemName: string): Locator {
@@ -28,5 +29,11 @@ export class InventoryPage extends BasePage {
       await expect(itemButton).toHaveText('Add to cart');
       await itemButton.click();
       await expect(itemButton).toHaveText('Remove');
+   }
+
+   async goToCart() {
+      await this.page.locator('#shopping_cart_container').click();
+      await expect(this.page).toHaveURL('https://www.saucedemo.com/cart.html');
+      return new CartPage(this.page);
    }
 }
