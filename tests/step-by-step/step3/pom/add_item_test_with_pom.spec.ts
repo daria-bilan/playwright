@@ -13,12 +13,20 @@ const item: Product = {
    },
 };
 
+const item2: Product = {
+   itemName: 'Sauce Labs Bike Light',
+   itemPrice: '$9.99',
+   details: {
+      itemDesc:
+         "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.",
+   },
+};
+
 test.describe('Same test with class', () => {
    test.beforeEach(async ({ page }) => {
       const loginPage: LoginPage = new LoginPage(page);
       await loginPage.goto('https://www.saucedemo.com/');
       await loginPage.login(credentials);
-      await loginPage.expectLoginSuccess();
    });
 
    test('Add item to the cart and updates cart badge', async ({ page }) => {
@@ -31,7 +39,12 @@ test.describe('Same test with class', () => {
 
       await invPage.addItemToCard(item.itemName);
 
+      await invPage.addItemToCard(item2.itemName);
+
       const itemsOnPage: number = await page.locator('.inventory_item').count();
       expect(itemsOnPage).toBe(6);
+
+      const cartPage = await invPage.goToCart();
+      expect(await cartPage.getCartItemsName()).toEqual([item.itemName, item2.itemName]);
    });
 });
