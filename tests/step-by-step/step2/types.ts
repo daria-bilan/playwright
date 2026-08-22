@@ -11,4 +11,10 @@ export interface Product {
    details?: { itemDesc?: string };
 }
 
+export interface CheckoutInfo {
+   firstName: string;
+   lastName: string;
+   postalCode: string;
+}
+
 export type SortOption = 'Name (A to Z)' | 'Name (Z to A)' | 'Price (low to high)' | 'Price (high to low)';

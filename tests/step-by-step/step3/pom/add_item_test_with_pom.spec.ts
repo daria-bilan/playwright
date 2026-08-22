@@ -1,6 +1,6 @@
 import { test, Locator, expect } from '@playwright/test';
 import { LoginPage } from './LoginPage';
-import { Credentials, Product } from '../../step2/types';
+import { Credentials, Product, CheckoutInfo } from '../../step2/types';
 import { InventoryPage } from './InventoryPage';
 
 const credentials: Credentials = { username: 'standard_user', password: 'secret_sauce' };
@@ -21,6 +21,8 @@ const item2: Product = {
          "A red light isn't the desired state in testing but it sure helps when riding your bike at night. Water-resistant with 3 lighting modes, 1 AAA battery included.",
    },
 };
+
+const checkoutInfo: CheckoutInfo = { firstName: 'FirstName', lastName: 'LastName', postalCode: '12345' };
 
 test.describe('Same test with class', () => {
    test.beforeEach(async ({ page }) => {
@@ -46,5 +48,12 @@ test.describe('Same test with class', () => {
 
       const cartPage = await invPage.goToCart();
       expect(await cartPage.getCartItemsName()).toEqual([item.itemName, item2.itemName]);
+
+      const checkoutInfoPage = await cartPage.proceedToCheckout();
+      await checkoutInfoPage.fillInfo(checkoutInfo);
+
+      const checkoutOverviewPage = await checkoutInfoPage.continueToOverview();
+      expect(await checkoutOverviewPage.getTotalPrice()).toBe('Total: $43.18');
+      await checkoutOverviewPage.finish();
    });
 });

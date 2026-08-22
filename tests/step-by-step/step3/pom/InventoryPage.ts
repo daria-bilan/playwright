@@ -1,4 +1,4 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Product } from '../../step2/types';
 import { CartPage } from './CartPage';
