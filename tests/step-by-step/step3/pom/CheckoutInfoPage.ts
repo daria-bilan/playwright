@@ -2,6 +2,7 @@ import { expect } from '@playwright/test';
 import { CheckoutInfo } from '../../step2/types';
 import { BasePage } from './BasePage';
 import { CheckoutOverviewPage } from './CheckoutOverviewPage';
+import { config } from '../config/environments';
 
 export class CheckoutInfoPage extends BasePage {
    async fillInfo(info: CheckoutInfo) {
@@ -13,7 +14,7 @@ export class CheckoutInfoPage extends BasePage {
    async continueToOverview() {
       await this.page.getByTestId('continue').click();
       await this.waitForState();
-      await expect(this.page).toHaveURL('https://www.saucedemo.com/checkout-step-two.html');
+      await expect(this.page).toHaveURL(config.baseURL + 'checkout-step-two.html');
       return new CheckoutOverviewPage(this.page);
    }
 }

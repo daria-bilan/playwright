@@ -1,6 +1,7 @@
 import { Page, Locator, expect } from '@playwright/test';
 import { Credentials } from '../../step2/types';
 import { BasePage } from './BasePage';
+import { config } from '../config/environments';
 
 export class LoginPage extends BasePage {
    private usernameField: Locator = this.page.getByPlaceholder('Username');
@@ -14,7 +15,7 @@ export class LoginPage extends BasePage {
    }
 
    async expectLoginSuccess() {
-      await expect(this.page).toHaveURL('https://www.saucedemo.com/inventory.html');
+      await expect(this.page).toHaveURL(config.baseURL + 'inventory.html');
       await this.waitForState();
    }
 }

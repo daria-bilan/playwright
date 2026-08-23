@@ -1,6 +1,7 @@
 import { expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { CheckoutInfoPage } from './CheckoutInfoPage';
+import { config } from '../config/environments';
 
 export class CartPage extends BasePage {
    async getCartItemsName() {
@@ -10,7 +11,7 @@ export class CartPage extends BasePage {
 
    async proceedToCheckout() {
       await this.page.getByRole('button', { name: 'checkout' }).click();
-      await expect(this.page).toHaveURL('https://www.saucedemo.com/checkout-step-one.html');
+      await expect(this.page).toHaveURL(config.baseURL + 'checkout-step-one.html');
       return new CheckoutInfoPage(this.page);
    }
 }

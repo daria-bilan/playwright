@@ -1,9 +1,18 @@
-import { Locator, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 import { Product } from '../../step2/types';
 import { CartPage } from './CartPage';
+import { CartBadge } from '../components/CartBadge';
+import { config } from '../config/environments';
 
 export class InventoryPage extends BasePage {
+   readonly cartBadge: CartBadge;
+
+   constructor(page: Page) {
+      super(page);
+      this.cartBadge = new CartBadge(page);
+   }
+
    public getItemCard(itemName: string): Locator {
       return this.page.locator('.inventory_item').filter({ hasText: itemName });
    }
@@ -33,7 +42,7 @@ export class InventoryPage extends BasePage {
 
    async goToCart() {
       await this.page.locator('#shopping_cart_container').click();
-      await expect(this.page).toHaveURL('https://www.saucedemo.com/cart.html');
+      await expect(this.page).toHaveURL(config.baseURL + 'cart.html');
       return new CartPage(this.page);
    }
 }
