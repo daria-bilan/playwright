@@ -11,7 +11,7 @@ export class CartBadge {
       return this.badge.textContent() as Promise<string>;
    }
 
-   async isVisisbleBadge(): Promise<boolean> {
+   async isVisibleBadge(): Promise<boolean> {
       return await this.badge.isVisible();
    }
 }

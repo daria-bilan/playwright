@@ -1,10 +1,9 @@
-import { test as base, expect } from '@playwright/test';
+import { test as base } from '@playwright/test';
 import { config } from '../step3/config/environments';
 import { credentials } from '../step3/data/credentials';
 import { InventoryPage } from '../step3/pom/InventoryPage';
 import { LoginPage } from '../step3/pom/LoginPage';
 import { itemsToCart } from '../step3/data/products';
-import { checkProductDetailes } from '../step3/helpers/checkProductDetailesHelper';
 
 type MyFixtures = { loggedInPage: InventoryPage; inventoryWithItemsInCart: InventoryPage };
 

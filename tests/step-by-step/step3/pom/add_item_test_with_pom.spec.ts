@@ -17,7 +17,7 @@ test.describe('Same test with class', () => {
 
    test('Add item to the cart and updates cart badge', async ({ page }) => {
       const invPage: InventoryPage = new InventoryPage(page);
-      expect(await invPage.cartBadge.isVisisbleBadge()).toBe(false);
+      expect(await invPage.cartBadge.isVisibleBadge()).toBe(false);
 
       for (let item of itemsToCart) {
          await checkProductDetailes(invPage, item);
