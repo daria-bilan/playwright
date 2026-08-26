@@ -1,7 +1,7 @@
 import { test as setup } from '@playwright/test';
-import { LoginPage } from '../step3/pom/LoginPage';
-import { config } from '../step3/config/environments';
-import { credentials } from '../step3/data/credentials';
+import { LoginPage } from './step3/pom/LoginPage';
+import { config } from './step3/config/environments';
+import { credentials } from './step3/data/credentials';
 
 const authFile = 'playwright/.auth/user.json';
 

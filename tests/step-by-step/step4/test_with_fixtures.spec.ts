@@ -1,7 +1,7 @@
 import { itemsToCart } from '../step3/data/products';
 import { fillAndSubmitCheckoutInfo } from '../step3/helpers/checkoutHelpers';
 import { checkoutInfo } from '../step3/data/checkoutInfo';
-import { test, expect } from './fixtures';
+import { test, expect } from './fixtures/fixtures';
 import { config } from '../step3/config/environments';
 import { InventoryPage } from '../step3/pom/InventoryPage';
 import { checkProductDetailes } from '../step3/helpers/checkProductDetailesHelper';
