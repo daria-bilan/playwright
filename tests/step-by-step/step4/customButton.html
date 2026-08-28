@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="uk">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Кастомна кнопка завантаження файлу</title>
+    <style>
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background-color: #f4f5f7;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+
+      .upload-container {
+        background-color: #ffffff;
+        padding: 30px;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      h2 {
+        margin-top: 0;
+        color: #333;
+        font-size: 20px;
+      }
+
+      p {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 24px;
+      }
+
+      /* Скриваємо стандартний інпут */
+      .file-input {
+        display: none;
+      }
+
+      /* Стилізуємо кастомну кнопку */
+      .custom-file-button {
+        display: inline-block;
+        padding: 12px 24px;
+        background-color: #007bff;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 6px;
+        cursor: pointer;
+        transition:
+          background-color 0.2s ease,
+          transform 0.1s ease;
+        user-select: none;
+      }
+
+      .custom-file-button:hover {
+        background-color: #0056b3;
+      }
+
+      .custom-file-button:active {
+        transform: scale(0.98);
+      }
+
+      /* Блок з інформацією про файл */
+      .file-info {
+        margin-top: 20px;
+        padding: 12px;
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 6px;
+        display: none;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .file-details {
+        text-align: left;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        margin-right: 10px;
+      }
+
+      .file-name {
+        display: block;
+        font-weight: 600;
+        color: #212529;
+        font-size: 14px;
+      }
+
+      .file-size {
+        display: block;
+        color: #6c757d;
+        font-size: 12px;
+        margin-top: 2px;
+      }
+
+      .delete-button {
+        background: none;
+        border: none;
+        color: #dc3545;
+        font-size: 18px;
+        cursor: pointer;
+        padding: 4px 8px;
+        border-radius: 4px;
+        line-height: 1;
+      }
+
+      .delete-button:hover {
+        background-color: #f8d7da;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="upload-container">
+      <h2>Завантаження файлу</h2>
+      <p>
+        Оберіть будь-який файл на комп'ютері, щоб побачити роботу кастомної
+        кнопки.
+      </p>
+
+      <!-- Прихований стандартний інпут -->
+      <input type="file" id="file-upload" class="file-input" />
+
+      <!-- Кастомна кнопка-лейбл -->
+      <label for="file-upload" class="custom-file-button" id="upload-label">
+        Обрати файл
+      </label>
+
+      <!-- Блок відображення файлу -->
+      <div class="file-info" id="file-info-block">
+        <div class="file-details">
+          <span class="file-name" id="file-name-text">filename.txt</span>
+          <span class="file-size" id="file-size-text">0 KB</span>
+        </div>
+        <button class="delete-button" id="reset-button" title="Видалити файл">
+          &times;
+        </button>
+      </div>
+    </div>
+
+    <script>
+      const fileInput = document.getElementById("file-upload");
+      const uploadLabel = document.getElementById("upload-label");
+      const fileInfoBlock = document.getElementById("file-info-block");
+      const fileNameText = document.getElementById("file-name-text");
+      const fileSizeText = document.getElementById("file-size-text");
+      const resetButton = document.getElementById("reset-button");
+
+      // Форматування розміру файлу
+      function formatBytes(bytes, decimals = 2) {
+        if (bytes === 0) return "0 Bytes";
+        const k = 1024;
+        const dm = decimals < 0 ? 0 : decimals;
+        const sizes = ["Bytes", "KB", "MB", "GB"];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return (
+          parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + " " + sizes[i]
+        );
+      }
+
+      // Слухач зміни стану інпуту (вибір файлу)
+      fileInput.addEventListener("change", function () {
+        if (this.files && this.files.length > 0) {
+          const file = this.files[0];
+
+          fileNameText.textContent = file.name;
+          fileSizeText.textContent = formatBytes(file.size);
+
+          fileInfoBlock.style.display = "flex";
+          uploadLabel.style.display = "none";
+        }
+      });
+
+      // Скидання вибору файлу
+      resetButton.addEventListener("click", function () {
+        fileInput.value = ""; // Очищаємо інпут
+        fileInfoBlock.style.display = "none";
+        uploadLabel.style.display = "inline-block";
+      });
+    </script>
+  </body>
+</html>
