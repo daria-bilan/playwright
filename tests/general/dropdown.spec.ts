@@ -40,7 +40,8 @@ test.describe('HTML elements', () => {
 
       const context = await browser.newContext({
          // spoof real Chrome user agent
-         userAgent: 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
+         userAgent:
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36',
          viewport: { width: 1280, height: 720 },
          locale: 'uk-UA',
       });
@@ -71,7 +72,7 @@ test.describe('HTML elements', () => {
       await browser.close();
    });
 
-   test.only('Hidden bootstrap dropdown', async ({ page }) => {
+   test('Hidden bootstrap dropdown', async ({ page }) => {
       await page.goto('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login');
 
       // Login steps
