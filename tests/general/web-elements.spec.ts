@@ -36,7 +36,7 @@ test.describe('Actions with web elements', () => {
       console.log('Product names:', trimmedNames);
    });
 
-   test.only('all method', async ({ page }) => {
+   test('all method', async ({ page }) => {
       const products: Locator = page.locator('.product-title');
       const allProductsLocators: Locator[] = await products.all(); // return locators of all elements into the array
       console.log(allProductsLocators);

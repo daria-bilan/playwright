@@ -1,7 +1,7 @@
 import { test, expect, Locator } from '@playwright/test';
 
 test.describe('XPath Locator', () => {
-   test.skip('Handle Dynamic elements using XPath', async ({ page }) => {
+   test('Handle Dynamic elements using XPath', async ({ page }) => {
       await page.goto('https://testautomationpractice.blogspot.com/');
 
       for (let i = 1; i <= 5; i++) {
@@ -45,7 +45,9 @@ test.describe('XPath Locator', () => {
       const followingSiblingsElements: Locator = page.locator('//td[text()="Germany"]/following-sibling::td');
       await expect(followingSiblingsElements).toHaveCount(0);
 
-      const followingSiblingsElements2: Locator = page.locator('//td[normalize-space()="Maria Anders"]/following-sibling::td');
+      const followingSiblingsElements2: Locator = page.locator(
+         '//td[normalize-space()="Maria Anders"]/following-sibling::td',
+      );
       await expect(followingSiblingsElements2).toHaveCount(1);
 
       // 8. preceding

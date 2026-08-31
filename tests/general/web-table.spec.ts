@@ -50,7 +50,7 @@ test.describe('Tables', () => {
       expect(chromeCPU).toBe(value);
    });
 
-   test.only('Get data from table with pagination', async ({ page }) => {
+   test('Get data from table with pagination', async ({ page }) => {
       await page.goto('https://datatables.net/examples/basic_init/zero_configuration.html');
 
       let morePages = true;
