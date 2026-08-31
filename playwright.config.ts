@@ -32,7 +32,7 @@ export default defineConfig({
       trace: 'on-first-retry',
 
       // Change the default 'data-testid
-      testIdAttribute: 'data-test',
+      // testIdAttribute: 'data-test',
    },
 
    /* Configure projects for major browsers */

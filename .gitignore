@@ -13,6 +13,7 @@ node_modules/
 /tests-examples/
 /allure-results/
 /.allure/
+**/testFiles/
 
 # Environment variables
 .env
