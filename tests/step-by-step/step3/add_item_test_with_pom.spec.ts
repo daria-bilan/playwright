@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { LoginPage } from './LoginPage';
-import { InventoryPage } from './InventoryPage';
-import { credentials } from '../data/credentials';
-import { itemsToCart } from '../data/products';
-import { checkoutInfo } from '../data/checkoutInfo';
-import { config } from '../config/environments';
-import { fillAndSubmitCheckoutInfo } from '../helpers/checkoutHelpers';
-import { checkProductDetailes } from '../helpers/checkProductDetailesHelper';
+import { LoginPage } from './pom/LoginPage';
+import { config } from './config/environments';
+import { credentials } from './data/credentials';
+import { InventoryPage } from './pom/InventoryPage';
+import { itemsToCart } from './data/products';
+import { checkProductDetailes } from './helpers/checkProductDetailesHelper';
+import { fillAndSubmitCheckoutInfo } from './helpers/checkoutHelpers';
+import { checkoutInfo } from './data/checkoutInfo';
 
 test.describe('Same test with class', () => {
    test.beforeEach(async ({ page }) => {
