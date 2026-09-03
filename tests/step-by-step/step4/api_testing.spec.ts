@@ -1,6 +1,7 @@
 // import { expect, test } from '@playwright/test';
 import { test, expect } from './fixtures/fixtures';
 import { wrongAPICrepentials } from './data/apiCredentials';
+import { mockPostResponseData } from './mocks/mockPostResponce';
 
 test('GET request example', async ({ request }) => {
    const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
@@ -95,4 +96,12 @@ test('GET Info of a related resourse', async ({ request }) => {
 test('GET Auth/me without token', async ({ request }) => {
    const response = await request.get('https://dummyjson.com/auth/me');
    expect(response.status()).toBe(401);
+});
+
+test('GET mocked post data', async ({ page, request }) => {
+   await mockPostResponseData(page);
+   const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
+   expect(response.status()).toBe(200);
+
+   const { id, title, body } = await response.json();
 });
