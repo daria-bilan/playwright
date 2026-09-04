@@ -14,9 +14,7 @@ test('GET request example', async ({ request }) => {
 });
 
 test('POST request example', async ({ request }) => {
-   const response = await request.post('https://jsonplaceholder.typicode.com/posts', {
-      data: { title: 'foo', body: 'bar', userId: 1 },
-   });
+   const response = await request.post('https://jsonplaceholder.typicode.com/posts', { data: { title: 'foo', body: 'bar', userId: 1 } });
 
    expect(response.status()).toBe(201);
    const body = await response.json();
@@ -48,9 +46,7 @@ test('GET request on non-existent endpoint', async ({ request }) => {
 });
 
 test('POST Authorization', async ({ request }) => {
-   const loginResponse = await request.post('https://dummyjson.com/auth/login', {
-      data: { username: 'emilys', password: 'emilyspass' },
-   });
+   const loginResponse = await request.post('https://dummyjson.com/auth/login', { data: { username: 'emilys', password: 'emilyspass' } });
 
    expect(loginResponse.status()).toBe(200);
    const { accessToken } = await loginResponse.json();
@@ -58,9 +54,7 @@ test('POST Authorization', async ({ request }) => {
 });
 
 test('GET Login and get authentificated user data', async ({ tokenFixture, request }) => {
-   const meResponse = await request.get('https://dummyjson.com/auth/me', {
-      headers: { Authorization: `Bearer ${tokenFixture}` },
-   });
+   const meResponse = await request.get('https://dummyjson.com/auth/me', { headers: { Authorization: `Bearer ${tokenFixture}` } });
 
    expect(meResponse.status()).toBe(200);
    const user = await meResponse.json();
@@ -68,9 +62,7 @@ test('GET Login and get authentificated user data', async ({ tokenFixture, reque
 });
 
 test('POST Wrong password', async ({ request }) => {
-   const wrongPasswordResponse = await request.post('https://dummyjson.com/auth/login', {
-      data: wrongAPICrepentials,
-   });
+   const wrongPasswordResponse = await request.post('https://dummyjson.com/auth/login', { data: wrongAPICrepentials });
 
    expect(wrongPasswordResponse.status()).toBe(400);
 });
@@ -99,9 +91,17 @@ test('GET Auth/me without token', async ({ request }) => {
 });
 
 test('GET mocked post data', async ({ page, request }) => {
-   await mockPostResponseData(page);
-   const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
-   expect(response.status()).toBe(200);
+   const response = await mockPostResponseData(page);
+   // expect(response.status).toBe(200);
 
-   const { id, title, body } = await response.json();
+   await page.goto('about:blank');
+   const data = await page.evaluate(async () => {
+      const response = await fetch('https://jsonplaceholder.typicode.com/posts/1');
+      return response.json();
+   });
+
+   console.log(`id: ${data.id}\ntitle: ${data.title}\nbody: ${data.body}`);
+   expect(data.id).toBe(1);
+   expect(data.title).toBe('Mocked Title');
+   expect(data.body).toBe('Mocked body');
 });
