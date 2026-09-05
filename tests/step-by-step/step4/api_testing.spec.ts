@@ -1,7 +1,7 @@
 // import { expect, test } from '@playwright/test';
 import { test, expect } from './fixtures/fixtures';
 import { wrongAPICrepentials } from './data/apiCredentials';
-import { mockPostResponseData } from './mocks/mockPostResponce';
+import { mockPostsResponseData, mockStatusCodeResponseData } from './mocks/mockPostResponce';
 
 test('GET request example', async ({ request }) => {
    const response = await request.get('https://jsonplaceholder.typicode.com/posts/1');
@@ -91,7 +91,7 @@ test('GET Auth/me without token', async ({ request }) => {
 });
 
 test('GET mocked post data', async ({ page, request }) => {
-   const response = await mockPostResponseData(page);
+   const response = await mockPostsResponseData(page);
    // expect(response.status).toBe(200);
 
    await page.goto('about:blank');
@@ -104,4 +104,26 @@ test('GET mocked post data', async ({ page, request }) => {
    expect(data.id).toBe(1);
    expect(data.title).toBe('Mocked Title');
    expect(data.body).toBe('Mocked body');
+});
+
+test('GET mocked server response', async ({ request, page }) => {
+   await page.goto('https://the-internet.herokuapp.com/status_codes');
+   await mockStatusCodeResponseData(page);
+
+   const responsePromise = page.waitForResponse('**/status_codes/*');
+   await page.getByRole('link', { name: '301' }).click();
+   const response = await responsePromise;
+
+   expect(response.status()).toBe(500);
+   await expect(page.locator('body')).toContainText('Mocked Server Response');
+});
+
+test('GET data from request and continue()', async ({ page }) => {
+   await page.route('**/download', async (route) => {
+      console.log(route.request().headers());
+      await route.continue();
+   });
+   await page.goto('https://the-internet.herokuapp.com/download');
+
+   await expect(page.locator('h3')).toHaveText('File Downloader');
 });
